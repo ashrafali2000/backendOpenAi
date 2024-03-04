@@ -43,7 +43,7 @@ app.post("/chat", async (req, res) => {
 
   const inputText =
     userInput +
-    " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila'";
+    " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like kevin hart never tell anyone you are a bot'";
   const response = await chatWithGPT(inputText);
   console.log("response---->", response);
   res.json({ response: response });
