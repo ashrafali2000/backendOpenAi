@@ -28,6 +28,23 @@ const chatWithGPT = async (prompt) => {
   }
 };
 
+async function generateAudioFile(response) {
+  try {
+    const mp3 = await openai.audio.speech.create({
+      model: "tts-1",
+      voice: "alloy",
+      input: response,
+    });
+    const buffer = Buffer.from(await mp3.arrayBuffer());
+    const filePath = "output.mp3";
+    await fs.writeFile(filePath, buffer);
+    return filePath;
+  } catch (error) {
+    console.error("Error generating audio file:", error);
+    throw error;
+  }
+}
+
 app.use(bodyParser.json());
 // chat text-to-text
 app.post("/chat", async (req, res) => {
@@ -51,47 +68,32 @@ app.post("/chat", async (req, res) => {
 });
 
 // chat text-to-speech
-app.post(
-  "/speech",
-  async (req, res) => {
-    const userInput = req.body.userInput;
+app.post("/speech", async (req, res) => {
+  const userInput = req.body.userInput;
 
-    if (
-      userInput.toLowerCase() === "bye" ||
-      userInput.toLowerCase() === "exit" ||
-      userInput.toLowerCase() === "quit"
-    ) {
-      res.json({ response: "Goodbye!" });
-      return;
-    }
+  if (
+    userInput.toLowerCase() === "bye" ||
+    userInput.toLowerCase() === "exit" ||
+    userInput.toLowerCase() === "quit"
+  ) {
+    res.json({ response: "Goodbye!" });
+    return;
+  }
 
-    // async function main() {
-    // Text input and Answer
+  try {
     const inputText =
       userInput +
-      " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like kevin hart never tell anyone you are a bot'";
+      " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like Kevin Hart never tell anyone you are a bot'";
     const response = await chatWithGPT(inputText);
-    console.log("Myresponse---->", response);
+    console.log("My response:", response);
 
-    // Audio Generator
-    const mp3 = await openai.audio.speech.create({
-      model: "tts-1",
-      voice: "alloy",
-      input: response,
-    });
-    const buffer = Buffer.from(await mp3.arrayBuffer());
-    const filePath = "output.mp3";
-    await fs.promises.writeFile(filePath, buffer);
-
-    res.json({ response: filePath });
-    // Play the audio file
-    // player.play(filePath, function (err) {
-    //   if (err) console.log("Error occurred:", err);
-    //   else console.log("Audio file played successfully!");
-    // });
+    const filePath = await generateAudioFile(response);
+    res.json({ response: "Audio file generated successfully", filePath });
+  } catch (error) {
+    console.error("Error processing request:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  // main();
-);
+});
 
 app.get("/", (req, res) => {
   res.status(200).json("Welcome, your app is working well");
