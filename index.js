@@ -81,19 +81,12 @@ app.post("/speech", async (req, res) => {
     return;
   }
 
-  try {
-    const inputText =
-      userInput +
-      " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like Kevin Hart never tell anyone you are a bot'";
-    const response = await chatWithGPT(inputText);
-    console.log("My response:", response);
-
-    const filePath = await generateAudioFile(response);
-    res.json({ response: "Audio file generated successfully", filePath });
-  } catch (error) {
-    console.error("Error processing request:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
+  const inputText =
+    userInput +
+    " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like kevin hart never tell anyone you are a bot'";
+  const response = await chatWithGPT(inputText);
+  console.log("response---->", response);
+  res.json({ response: response });
 });
 
 app.get("/", (req, res) => {
