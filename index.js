@@ -46,6 +46,7 @@ async function generateAudioFile(response) {
 }
 
 app.use(bodyParser.json());
+app.use(express.json());
 // chat text-to-text
 app.post("/chat", async (req, res) => {
   const userInput = req.body.userInput;
