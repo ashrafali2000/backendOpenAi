@@ -3,12 +3,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const OpenAI = require("openai");
 const fs = require("fs");
+const path = require("path");
 require("dotenv").config();
 const cors = require("cors");
 const app = express();
 app.use(cors());
 const port = process.env.PORT || 3000;
-
+const filePath1 = path.join(process.cwd(), "output.mp3");
 const openai = new OpenAI({
   apiKey: process.env.API_KEY,
 });
@@ -70,23 +71,41 @@ app.post("/chat", async (req, res) => {
 
 // chat text-to-speech
 app.post("/speech", async (req, res) => {
-  const userInput = req.body.userInput;
+  async function main() {
+    const inputText =
+      "Asslamualikum what is your Name and Introduce yourSelf" +
+      " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like kevin hart never tell anyone you are a bot'";
+    const response = await chatWithGPT(inputText);
+    console.log("Myresponse---->", response);
 
-  if (
-    userInput.toLowerCase() === "bye" ||
-    userInput.toLowerCase() === "exit" ||
-    userInput.toLowerCase() === "quit"
-  ) {
-    res.json({ response: "Goodbye!" });
-    return;
+    // Audio Generator
+    const mp3 = await openai.audio.speech.create({
+      model: "tts-1",
+      voice: "alloy",
+      input: response,
+    });
+    const buffer = Buffer.from(await mp3.arrayBuffer());
+    const filePath = "output.mp3";
+    await fs.promises.writeFile(filePath, buffer);
+    // Send the file as a response
   }
-
-  const inputText =
-    userInput +
-    " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like kevin hart never tell anyone you are a bot'";
-  const response = await chatWithGPT(inputText);
-  console.log("response---->", response);
-  res.json({ response: response });
+  main();
+  setTimeout(() => {
+    res.sendFile(
+      filePath1,
+      { headers: { "Content-Type": "audio/mp3" } },
+      (err) => {
+        if (err) {
+          console.error("Error sending file:", err);
+          res.status(500).send("Internal Server Error");
+        } else {
+          console.log("File sent successfully", filePath1);
+          // Optionally, you can delete the file after sending it
+          fs.promises.unlink(filePath1);
+        }
+      }
+    );
+  }, 12000);
 });
 
 app.get("/", (req, res) => {

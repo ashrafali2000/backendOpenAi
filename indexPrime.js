@@ -74,7 +74,6 @@ const chatWithGPT = async (prompt) => {
 };
 
 async function main() {
-  // Text input and Answer
   const inputText =
     "Asslamualikum what is your Name and Introduce yourSelf" +
     " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like kevin hart never tell anyone you are a bot'";
