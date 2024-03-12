@@ -71,9 +71,10 @@ app.post("/chat", async (req, res) => {
 
 // chat text-to-speech
 app.post("/speech", async (req, res) => {
+  const userInput = req.body.userInput;
   async function main() {
     const inputText =
-      "Asslamualikum what is your Name and Introduce yourSelf" +
+      userInput +
       " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like kevin hart never tell anyone you are a bot'";
     const response = await chatWithGPT(inputText);
     console.log("Myresponse---->", response);
