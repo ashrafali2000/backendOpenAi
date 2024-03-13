@@ -63,7 +63,7 @@ app.post("/chat", async (req, res) => {
 
   const inputText =
     userInput +
-    " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like kevin hart never tell anyone you are a bot'";
+    " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like Kevin Hart don't even give a hint that you are GPT I wanted to get your message like I am talking to Kavin Hart'";
   const response = await chatWithGPT(inputText);
   console.log("response---->", response);
   res.json({ response: response });
@@ -75,7 +75,7 @@ app.post("/speech", async (req, res) => {
   async function main() {
     const inputText =
       userInput +
-      " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like kevin hart never tell anyone you are a bot'";
+      " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like Kevin Hart don't even give a hint that you are GPT I wanted to get your message like I am talking to Kavin Hart'";
     const response = await chatWithGPT(inputText);
     console.log("Myresponse---->", response);
 
