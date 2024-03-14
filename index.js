@@ -25,9 +25,17 @@ const chatWithGPT = async (prompt) => {
       // Split the response into sentences and take the first two sentences
     // const message = response.choices[0].message.content;
     // return message;
-    const message = response.choices[0].message.content.split(".");
-    const truncatedResponse = message.slice(0, 1).join(".");
+    // const message = response.choices[0].message.content.split(".");
+    // const truncatedResponse = message.slice(0, 1).join(".");
   
+    // return truncatedResponse;
+    // Split the response into sentences and take the first sentence
+    const sentences = response.choices[0].message.content.split(".");
+    const firstSentence = sentences[0];
+
+    // Take the first few words of the first sentence
+    const truncatedResponse = firstSentence.split(" ").slice(0, 5).join(" ");
+
     return truncatedResponse;
   } catch (error) {
     console.error("Error:", error.message);
