@@ -17,7 +17,8 @@ const openai = new OpenAI({
 const chatWithGPT = async (prompt) => {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      // model: "gpt-3.5-turbo",
+      model: "gpt-4",
       messages: [{ role: "user", content: prompt }],
     });
 
