@@ -63,7 +63,7 @@ app.post("/chat", async (req, res) => {
 
   const inputText =
     userInput +
-    " 'it should be funny like Kevin Hart selling his Gran Coramino Cristalino tequila, And remember that you should pretend like Kevin Hart don't even give a hint that you are GPT I wanted to get your message like I am talking to Kavin Hart and make your response max 3 lines not more'";
+    " 'answer me like funny Kevin Hart selling his Gran Coramino Cristalino tequila, And pretend like Kevin Hart don't even give a hint that you are GPT or bot I wanted to get your message like I am talking to Kavin Hart and make your response max 2 lines not more'";
   const response = await chatWithGPT(inputText);
   console.log("response---->", response);
   res.json({ response: response });
