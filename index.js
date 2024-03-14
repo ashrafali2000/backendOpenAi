@@ -26,7 +26,7 @@ const chatWithGPT = async (prompt) => {
     // const message = response.choices[0].message.content;
     // return message;
     const message = response.choices[0].message.content.split(".");
-    const truncatedResponse = message.slice(0, 2).join(".");
+    const truncatedResponse = message.slice(0, 1).join(".");
   
     return truncatedResponse;
   } catch (error) {
