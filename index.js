@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const OpenAI = require("openai");
 const fs = require("fs");
+const Gtts = require("gtts");
 const path = require("path");
 require("dotenv").config();
 const cors = require("cors");
@@ -120,35 +121,8 @@ app.post("/chat", async (req, res) => {
 // new code
 app.post("/speech", async (req, res) => {
   const userInput = req.body.userInput;
-
-  async function main() {
-    const inputText =
-      "'answer as you are Kevin Hart selling your Gran Coramino Cristalino tequila, I wanted to get your message like I am talking to Kavin Hart and make your response max 2 sentences not more, if you say you are AI or bot or gpt then your answer will be useless so make sure that i should feel like i am talking to one and only real kavin hart so my question is '" +
-      userInput;
-    const response = await chatWithGPT(inputText);
-    console.log("Myresponse---->", response);
-
-    // Audio Generator
-    const mp3Stream = await openai.audio.speech.createStream({
-      model: "tts-1",
-      voice: "alloy",
-      input: response,
-    });
-
-    // Set the appropriate headers for streaming audio
-    res.set({
-      "Content-Type": "audio/mpeg",
-      "Transfer-Encoding": "chunked",
-    });
-
-    // Pipe the audio stream to the response
-    mp3Stream.pipe(res);
-  }
-
-  main().catch((err) => {
-    console.error("Error:", err);
-    res.status(500).send("Internal Server Error");
-  });
+  const gtts = new Gtts(userInput, "en");
+  gtts.stream().pipe(res);
 });
 
 app.get("/", (req, res) => {
