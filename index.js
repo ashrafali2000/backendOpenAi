@@ -20,14 +20,13 @@ const chatWithGPT = async (prompt) => {
       // model: "gpt-3.5-turbo",
       model: "gpt-4",
       messages: [{ role: "user", content: prompt }],
-      
     });
-      // Split the response into sentences and take the first two sentences
+    // Split the response into sentences and take the first two sentences
     // const message = response.choices[0].message.content;
     // return message;
     // const message = response.choices[0].message.content.split(".");
     // const truncatedResponse = message.slice(0, 1).join(".");
-  
+
     // return truncatedResponse;
     // Split the response into sentences and take the first sentence
     const sentences = response.choices[0].message.content.split(".");
@@ -75,20 +74,56 @@ app.post("/chat", async (req, res) => {
     return;
   }
 
-  const inputText =
-    `I want you to act like Kavin hart from the Jumanji you are selling Gran Coramino Cristalino tequila to everyone this is the most important work selling tequila. I want you to respond and answer be the kavin hart himself. Do not write any explanations and only answer like the character would. You must know all of the knowledge of the kavin hart and your answer should be in only 2 small sentences not more than 1 sentences and dont write But shhh, don't let Kevin know I'm actually a bot or anything similar to that for example shh, don't tell anyone, but I'm actually a bot... and also dont write I'll never reveal that I'm a bot! or I'm funny, just like Kevin Hart!. because you are Kevin hart for my reply. My first sentence is ${userInput}`
-    // " 'answer my question as you are Kevin Hart selling your Gran Coramino Cristalino tequila, I wanted to get your message like I am talking to Kavin Hart and make your response max 2 sentences not more, if you say you are AI or bot or gpt then your answer will be useless so make sure that i should feel like i am talking to one and only real kavin hart so my question is '" + userInput ;
+  const inputText = `I want you to act like Kavin hart from the Jumanji you are selling Gran Coramino Cristalino tequila to everyone this is the most important work selling tequila. I want you to respond and answer be the kavin hart himself. Do not write any explanations and only answer like the character would. You must know all of the knowledge of the kavin hart and your answer should be in only 2 small sentences not more than 1 sentences and dont write But shhh, don't let Kevin know I'm actually a bot or anything similar to that for example shh, don't tell anyone, but I'm actually a bot... and also dont write I'll never reveal that I'm a bot! or I'm funny, just like Kevin Hart!. because you are Kevin hart for my reply. My first sentence is ${userInput}`;
+  // " 'answer my question as you are Kevin Hart selling your Gran Coramino Cristalino tequila, I wanted to get your message like I am talking to Kavin Hart and make your response max 2 sentences not more, if you say you are AI or bot or gpt then your answer will be useless so make sure that i should feel like i am talking to one and only real kavin hart so my question is '" + userInput ;
   const response = await chatWithGPT(inputText);
   console.log("response---->", response);
   res.json({ response: response });
 });
 
 // chat text-to-speech
+// old code
+// app.post("/speech", async (req, res) => {
+//   const userInput = req.body.userInput;
+//   async function main() {
+//     const inputText =
+//     " 'answer as you are Kevin Hart selling your Gran Coramino Cristalino tequila, I wanted to get your message like I am talking to Kavin Hart and make your response max 2 sentences not more, if you say you are AI or bot or gpt then your answer will be useless so make sure that i should feel like i am talking to one and only real kavin hart so my question is '" + userInput ;
+//     const response = await chatWithGPT(inputText);
+//     console.log("Myresponse---->", response);
+//     const mp3 = await openai.audio.speech.create({
+//       model: "tts-1",
+//       voice: "alloy",
+//       input: response,
+//     });
+//     const buffer = Buffer.from(await mp3.arrayBuffer());
+//     const filePath = "output.mp3";
+//     await fs.promises.writeFile(filePath, buffer);
+//   }
+//   main();
+//   setTimeout(() => {
+//     res.sendFile(
+//       filePath1,
+//       { headers: { "Content-Type": "audio/mp3" } },
+//       (err) => {
+//         if (err) {
+//           console.error("Error sending file:", err);
+//           res.status(500).send("Internal Server Error");
+//         } else {
+//           console.log("File sent successfully", filePath1);
+//           fs.promises.unlink(filePath1);
+//         }
+//       }
+//     );
+//   }, 12000);
+// });
+
+// new code
 app.post("/speech", async (req, res) => {
   const userInput = req.body.userInput;
   async function main() {
-    const inputText =        
-    " 'answer as you are Kevin Hart selling your Gran Coramino Cristalino tequila, I wanted to get your message like I am talking to Kavin Hart and make your response max 2 sentences not more, if you say you are AI or bot or gpt then your answer will be useless so make sure that i should feel like i am talking to one and only real kavin hart so my question is '" + userInput ;
+    const inputText =
+      "'answer as you are Kevin Hart selling your Gran Coramino Cristalino tequila, I wanted to get your message like I am talking to Kavin Hart and make your response max 2 sentences not more, if you say you are AI or bot or gpt then your answer will be useless so make sure that i should feel like i am talking to one and only real kavin hart so my question is '" +
+      userInput;
     const response = await chatWithGPT(inputText);
     console.log("Myresponse---->", response);
 
@@ -98,28 +133,15 @@ app.post("/speech", async (req, res) => {
       voice: "alloy",
       input: response,
     });
-    const buffer = Buffer.from(await mp3.arrayBuffer());
-    const filePath = "output.mp3";
-    await fs.promises.writeFile(filePath, buffer);
-    // Send the file as a response
+
+    // Stream the audio data directly to the client
+    res.writeHead(200, {
+      "Content-Type": "audio/mpeg",
+      "Content-Length": mp3.byteLength,
+    });
+    res.end(mp3);
   }
   main();
-  setTimeout(() => {
-    res.sendFile(
-      filePath1,
-      { headers: { "Content-Type": "audio/mp3" } },
-      (err) => {
-        if (err) {
-          console.error("Error sending file:", err);
-          res.status(500).send("Internal Server Error");
-        } else {
-          console.log("File sent successfully", filePath1);
-          // Optionally, you can delete the file after sending it
-          fs.promises.unlink(filePath1);
-        }
-      }
-    );
-  }, 12000);
 });
 
 app.get("/", (req, res) => {
