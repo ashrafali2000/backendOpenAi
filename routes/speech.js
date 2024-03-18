@@ -4,8 +4,8 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   const { userInput } = req.body;
   console.log(userInput);
+  const response = await chatWithGPT(userInput);
   try {
-    const response = await chatWithGPT(userInput);
     const audioFile = await generateAudioFile(response);
     res.status(200).send({ audioFile: audioFile, response: response });
   } catch (error) {
