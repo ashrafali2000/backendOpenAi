@@ -52,9 +52,8 @@ async function generateAudioFile(response) {
       input: response,
     });
     const buffer = Buffer.from(await mp3.arrayBuffer());
-    const filePath = "output.mp3";
-    await fs.writeFile(filePath, buffer);
-    return filePath;
+    const audioSrc = `data:audio/mp3;base64,${buffer.toString("base64")}`;
+    return audioSrc;
   } catch (error) {
     console.error("Error generating audio file:", error);
     throw error;
@@ -124,31 +123,10 @@ app.post("/speech", async (req, res) => {
   const { userInput } = req.body;
   console.log(userInput);
   try {
-    PlayHT.init({
-      apiKey: "b9ae213f97424ce4b593785fabe06dec",
-      userId: "UZCB4WqsALXrD5vJb2LAv8FMwOf1",
-      defaultVoiceId:
-        "s3://peregrine-voices/oliver_narrative2_parrot_saad/manifest.json",
-      defaultVoiceEngine: "PlayHT2.0",
-    });
-
-    const generated = await PlayHT.generate(userInput, {
-      voiceEngine: "PlayHT2.0",
-      voiceId:
-        "s3://peregrine-voices/oliver_narrative2_parrot_saad/manifest.json",
-      outputFormat: "mp3",
-      temperature: 1.5,
-      quality: "high",
-      speed: 0.8,
-    });
-
-    // Grab the generated file URL
-    const { audioUrl } = generated;
-
-    console.log("The url for the audio file is", audioUrl);
-    res.status(200).send({ audiourl: audioUrl, userInput: userInput });
+    const response = await chatWithGPT(userInput);
+    const audioFile = await generateAudioFile(response);
+    res.status(200).send({ audioFile: audioFile, response: response });
   } catch (error) {
-    console.error("Error generating speech:", error.message);
     res.status(500).json({ error: "Error generating speech" });
   }
 });
