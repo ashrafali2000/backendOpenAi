@@ -146,7 +146,7 @@ app.post("/speech", async (req, res) => {
     const { audioUrl } = generated;
 
     console.log("The url for the audio file is", audioUrl);
-    res.status(200).send({ data: audioUrl });
+    res.status(200).send({ audiourl: audioUrl, userInput: userInput });
   } catch (error) {
     console.error("Error generating speech:", error.message);
     res.status(500).json({ error: "Error generating speech" });
