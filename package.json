@@ -4,7 +4,7 @@
   "description": "this chat bot is sole property of bawdicsoft",
   "main": "index.js",
   "scripts": {
-    "test": "start"
+    "start": "index.js"
   },
   "author": "zubair",
   "license": "ISC",
