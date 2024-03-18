@@ -1,6 +1,7 @@
 // Node js code
 const express = require("express");
 const bodyParser = require("body-parser");
+const PlayHT = require("playht");
 const OpenAI = require("openai");
 const fs = require("fs");
 const Gtts = require("gtts");
@@ -120,9 +121,36 @@ app.post("/chat", async (req, res) => {
 
 // new code
 app.post("/speech", async (req, res) => {
-  const userInput = req.body.userInput;
-  const gtts = new Gtts(userInput, "en");
-  gtts.stream().pipe(res);
+  const { userInput } = req.body;
+  console.log(userInput);
+  try {
+    PlayHT.init({
+      apiKey: "b9ae213f97424ce4b593785fabe06dec",
+      userId: "UZCB4WqsALXrD5vJb2LAv8FMwOf1",
+      defaultVoiceId:
+        "s3://peregrine-voices/oliver_narrative2_parrot_saad/manifest.json",
+      defaultVoiceEngine: "PlayHT2.0",
+    });
+
+    const generated = await PlayHT.generate(userInput, {
+      voiceEngine: "PlayHT2.0",
+      voiceId:
+        "s3://peregrine-voices/oliver_narrative2_parrot_saad/manifest.json",
+      outputFormat: "mp3",
+      temperature: 1.5,
+      quality: "high",
+      speed: 0.8,
+    });
+
+    // Grab the generated file URL
+    const { audioUrl } = generated;
+
+    console.log("The url for the audio file is", audioUrl);
+    res.status(200).send({ data: audioUrl });
+  } catch (error) {
+    console.error("Error generating speech:", error.message);
+    res.status(500).json({ error: "Error generating speech" });
+  }
 });
 
 app.get("/", (req, res) => {
