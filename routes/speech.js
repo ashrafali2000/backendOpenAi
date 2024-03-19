@@ -6,8 +6,8 @@ router.post("/", async (req, res) => {
   console.log(userInput);
   try {
     const response = await chatWithGPT(userInput);
-    const audioFile = await generateAudioFile(response);
-    res.json({ audioFile: audioFile, response: response });
+    // const audioFile = await generateAudioFile(response);
+    res.json({ response: response });
   } catch (error) {
     res.json({ error: "Error generating speech" });
   }
