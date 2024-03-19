@@ -40,7 +40,7 @@ const generateAudioFile = async (response) => {
     });
     const buffer = Buffer.from(await mp3.arrayBuffer());
     const audioSrc = `data:audio/mp3;base64,${buffer.toString("base64")}`;
-    return audioSrc;
+    return buffer;
   } catch (error) {
     console.error("Error generating audio file:", error);
     throw error;
