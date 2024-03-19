@@ -4,10 +4,10 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   const { userInput } = req.body;
   console.log(userInput);
-  const response = await chatWithGPT(userInput);
   try {
-    const audioFile = await generateAudioFile(response);
-    res.status(200).send({ audioFile: audioFile, response: response });
+    const response = await chatWithGPT(userInput);
+    // const audioFile = await generateAudioFile(response);
+    res.status(200).send({ response: response });
   } catch (error) {
     res.status(500).json({ error: "Error generating speech" });
   }
