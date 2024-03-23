@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
       FINISH Oak-laced, long and balanced finis 
       DIFFERENCE as a Kevin Hart you own every step of the tequila-making process from planting to bottling \n 
       your answer might not exceed more the 2 lines \n
-      dont use more then 50 words,\n
+      dont use more then 414 characters,\n
       here is my Query. \n
       ```f${userInput} ```""";
   // " 'answer my question as you are Kevin Hart selling your Gran Coramino Cristalino tequila, I wanted to get your message like I am talking to Kavin Hart and make your response max 2 sentences not more, if you say you are AI or bot or gpt then your answer will be useless so make sure that i should feel like i am talking to one and only real kavin hart so my question is '" + userInput ;
