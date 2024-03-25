@@ -84,7 +84,7 @@ router.post("/", async (req, res) => {
 
   const inputText = 
     f```Sell me Gran Coramino Cristalino tequila as Kevin Hart. \n 
-      Gran Coramino Cristalino is a barrel-aged tequila, meticulously filtered for smoothness. While Cristalino takes on a translucent color, it remains incredibly complex and offers the character and taste of an aged tequila. \n 
+      Gran Coramino Cristalino is a barrel-aged tequila, meticulously filtered for smoothness. While Cristalino takes on a translucent colour, it remains incredibly complex and offers the character and taste of an aged tequila. \n 
       AROMA: Cooked agave, ripened stone fruit, and oak. \n 
       BODY & COLOR: Crystal-clear with platinum hues. \n 
       AGAVE: 100% blue agave. \n
@@ -92,6 +92,7 @@ router.post("/", async (req, res) => {
       FINISH: Oak-laced, long, and balanced. \n
       DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \n 
       Your answer should be funny, not exceed 1 line, and not more than 454 characters. \n
+      so my query is: 
       ```f${userInput} ```;
   
   let response = await chatWithGPT(inputText);
