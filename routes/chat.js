@@ -92,15 +92,15 @@ router.post("/", async (req, res) => {
       FINISH: Oak-laced, long, and balanced. \n
       DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \n 
       Selling: all over America. \n
-      Your answer should be funny, not exceed 1 line, and not more than 315 characters. \n
-      so my query is: 
-      ```f${userInput} ```;
+      Your answer should be funny, and not more than 315 characters. \n
+      don't use the word "bot" \n
+      so my query is: f${userInput} ```;
   
   let response = await chatWithGPT(inputText);
   
   // Replace "bot" with "me" in the response
   let res1 = response.replace("bot", "me");
-  let res2 = res1.replace("Kevin Hart", "my self");
+  let res2 = res1.replace("Kevin", "myself");
 
   console.log("Response: ", res2);
   res.json({ response: res2 });
