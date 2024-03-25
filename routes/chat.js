@@ -91,18 +91,18 @@ router.post("/", async (req, res) => {
       FLAVOR: Vanilla bean, toffee, dark berries, and light spice. \n
       FINISH: Oak-laced, long, and balanced. \n
       DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \n 
-      Your answer should be funny, not exceed 1 line, and not more than 400 characters. \n
+      Your answer should be funny, not exceed 1 line, and not more than 350 characters. \n
       so my query is: 
       ```f${userInput} ```;
   
   let response = await chatWithGPT(inputText);
   
   // Replace "bot" with "me" in the response
-  response = response.replace(bot, me);
-  response = response.replace(Kevin Hart, my);
+  let res1 = response.replace(bot, me);
+  let res2 = res1.replace(Kevin Hart, my);
 
-  console.log("Response: ", response);
-  res.json({ response: response });
+  console.log("Response: ", res2);
+  res.json({ response: res2 });
 });
 
 module.exports = router;
