@@ -92,9 +92,8 @@ router.post("/", async (req, res) => {
       FINISH: Oak-laced, long, and balanced. \n
       DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \n 
       Selling: all over America. \n
-      Your answer should be funny, and not more than 315 characters. \n
-      don't use the word "bot" \n
-      so my query is: f${userInput} ```;
+      Your answer should be funny, and not more than 300 characters. \n
+      don't use the word "bot". so my query is: f${userInput} ```;
   
   let response = await chatWithGPT(inputText);
   
