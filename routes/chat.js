@@ -98,7 +98,8 @@ router.post("/", async (req, res) => {
   let response = await chatWithGPT(inputText);
   
   // Replace "bot" with "me" in the response
-  response = response.replace(/bot/g, "me");
+  response = response.replace(bot, me);
+  response = response.replace(Kevin Hart, my);
 
   console.log("Response: ", response);
   res.json({ response: response });
