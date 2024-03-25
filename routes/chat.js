@@ -91,7 +91,7 @@ router.post("/", async (req, res) => {
       FLAVOR: Vanilla bean, toffee, dark berries, and light spice. \n
       FINISH: Oak-laced, long, and balanced. \n
       DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \n 
-      Your answer should be funny, not exceed 1 line, and not more than 454 characters. \n
+      Your answer should be funny, not exceed 1 line, and not more than 400 characters. \n
       so my query is: 
       ```f${userInput} ```;
   
