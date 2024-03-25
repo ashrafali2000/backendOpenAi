@@ -94,13 +94,13 @@ router.post("/", async (req, res) => {
       Your answer should be funny, not exceed 1 line, and not more than 454 characters. \n
       ```f${userInput} ```;
   
-  const response = await chatWithGPT(inputText);
+  let response = await chatWithGPT(inputText);
   
   // Replace "bot" with "me" in the response
-  const sanitizedResponse = response.replace(/bot/g, "me");
+  response = response.replace(/bot/g, "me");
 
-  console.log("Response: ", sanitizedResponse);
-  res.json({ response: sanitizedResponse });
+  console.log("Response: ", response);
+  res.json({ response: response });
 });
 
 module.exports = router;
