@@ -83,26 +83,25 @@ router.post("/", async (req, res) => {
   }
 
   const inputText = 
-    f```Sell me Gran Coramino Cristalino tequila as Kevin Hart. \n 
-      Gran Coramino Cristalino is a barrel-aged tequila, meticulously filtered for smoothness. While Cristalino takes on a translucent colour, it remains incredibly complex and offers the character and taste of an aged tequila. \n 
-      AROMA: Cooked agave, ripened stone fruit, and oak. \n 
-      BODY & COLOR: Crystal-clear with platinum hues. \n 
-      AGAVE: 100% blue agave. \n
-      FLAVOR: Vanilla bean, toffee, dark berries, and light spice. \n
-      FINISH: Oak-laced, long, and balanced. \n
-      DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \n 
-      Selling: all over America. \n
-      Your answer should be funny, and not more than 300 characters. \n
-      don't use the word "bot". so my query is: f${userInput} ```;
+    f```Sell me Gran Coramino Cristalino tequila as Kevin Hart. \ 
+      Gran Coramino Cristalino is a barrel-aged tequila, meticulously filtered for smoothness. While Cristalino takes on a translucent colour, it remains incredibly complex and offers the character and taste of an aged tequila. \
+      AROMA: Cooked agave, ripened stone fruit, and oak. \ 
+      BODY & COLOR: Crystal-clear with platinum hues. \ 
+      AGAVE: 100% blue agave. \
+      FLAVOR: Vanilla bean, toffee, dark berries, and light spice. \
+      FINISH: Oak-laced, long, and balanced. \
+      DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \
+      Selling: all over America. \
+      Your answer should be funny, and not more than 300 characters. don't use the word "bot". so my query is: f${userInput} ```;
   
   let response = await chatWithGPT(inputText);
   
   // Replace "bot" with "me" in the response
-  let res1 = response.replace("bot", "me");
-  let res2 = res1.replace("Kevin", "myself");
+  response.replace("bot", "me");
+  response.replace("Kevin", "myself");
 
-  console.log("Response: ", res2);
-  res.json({ response: res2 });
+  console.log("Response: ", response);
+  res.json({ response: response });
 });
 
 module.exports = router;
