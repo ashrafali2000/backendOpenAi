@@ -79,7 +79,6 @@ router.post("/", async (req, res) => {
     userInput.toLowerCase() === "quit"
   ) {
     res.json({ response: "Goodbye!" });
-    return;
   }
 
   const inputText = `Sell me Gran Coramino Cristalino tequila as Kevin Hart. \ 
