@@ -24,7 +24,7 @@ const chatWithGPT = async (prompt) => {
     // Take the first few words of the first sentence
     const truncatedResponse = firstSentence.split(" ").slice(0, 5).join(" ");
 
-    return truncatedResponse;
+    return `${truncatedResponse}-this is wrong`;
   } catch (error) {
     console.error("Error:", error.message);
     return "api not working";

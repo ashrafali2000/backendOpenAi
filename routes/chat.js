@@ -82,7 +82,7 @@ router.post("/", async (req, res) => {
     return;
   }
 
-  const inputText = f```Sell me Gran Coramino Cristalino tequila as Kevin Hart. \ 
+  const inputText = `Sell me Gran Coramino Cristalino tequila as Kevin Hart. \ 
       Gran Coramino Cristalino is a barrel-aged tequila, meticulously filtered for smoothness. While Cristalino takes on a translucent colour, it remains incredibly complex and offers the character and taste of an aged tequila. \
       AROMA: Cooked agave, ripened stone fruit, and oak. \ 
       BODY & COLOR: Crystal-clear with platinum hues. \ 
@@ -91,7 +91,7 @@ router.post("/", async (req, res) => {
       FINISH: Oak-laced, long, and balanced. \
       DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \
       Selling: all over America. \
-      Your answer should be funny, and not more than 300 characters. don't use the word "bot". so my query is: f${userInput} ```;
+      Your answer should be funny, and not more than 300 characters. don't use the word "bot". so my query is: f${userInput}`;
 
   let response1 = await chatWithGPT(inputText);
 
