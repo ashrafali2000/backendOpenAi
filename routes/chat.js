@@ -90,16 +90,16 @@ router.post("/", async (req, res) => {
       FINISH: Oak-laced, long, and balanced. \
       DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \
       Selling: all over America. \
-      Your answer should be funny, and not more than 300 characters. don't use the word "bot". so my query is:${userInput}`;
+      Your answer should be funny, and not more than 300 characters. don't use the word "bot". so my query is: ${userInput}`;
 
-  let response1 = await chatWithGPT(inputText);
+  let response = await chatWithGPT(inputText);
 
   // Replace "bot" with "me" in the response
-  // let res1 = response.replace(/bot/g, "me");
-  // let res2 = res1.replace(/Kevin/g, "myself");
+  let res1 = response.replace(/bot/g, "me");
+  let res2 = res1.replace(/Kevin/g, "myself");
 
-  // console.log("Response: ", res2);
-  res.json({ response: `${response1}----checking` });
+  console.log("Response: ", res2);
+  res.json({ response: res2 });
 });
 
 module.exports = router;
