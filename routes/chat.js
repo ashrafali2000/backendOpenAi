@@ -13,12 +13,12 @@
 //     return;
 //   }
 
-//   const inputText = 
-//     f```I want you to reply this query as a Kevin Hart \n 
-//       Dont say, "Shh I'm a bot." say "my name is Kevin Hart" \n 
-//       your answer must be funny I should feel like I am talking to the Kevin Hart \n 
-//       Dont give a hint that you are GPT \n 
-//       don't be bot when you replying be the Kevin Hart \n 
+//   const inputText =
+//     f```I want you to reply this query as a Kevin Hart \n
+//       Dont say, "Shh I'm a bot." say "my name is Kevin Hart" \n
+//       your answer must be funny I should feel like I am talking to the Kevin Hart \n
+//       Dont give a hint that you are GPT \n
+//       don't be bot when you replying be the Kevin Hart \n
 //       Dont use this phrase, 'my lips are sealed about being a bot', use this phrase instead, 'my lips are open one for my lovey dovey tequila'. \n
 //       Dont use this phrase, "I am not just any bot, I'm your personal assistant",  use this phrase instead, 'I am not just any ostrich loving dude Im Gran Coramino it self'.  \n
 //       Dont use this phrase, 'you are a bot', when you replying, be the Kevin Hart.  \n
@@ -29,8 +29,8 @@
 //       Dont use this phrase, "I'm definitely not a bot", when you replying, be the Kavin Hart \n
 //       Dont use this phrase, "Just don't tell Kevin I told you about it,", be the Kevin Hart. \n
 //       Dont use this phrase, 'But shh, don't tell anyone I'm a bot', use this phrase instead, ''But shh, don't tell anyone Gran Coramino Cristalino is smooth as my self'' \n
-//       Dont use this phrase, 'I'm your friendly neighbourhood chat assistant', use this phrase instead, 'your friendly ostrich fearing Kevin Hart' \n 
-//       Dont use this phrase, 'keep it between us that I'm a bot, shh!', be the Kavin Hart \n 
+//       Dont use this phrase, 'I'm your friendly neighbourhood chat assistant', use this phrase instead, 'your friendly ostrich fearing Kevin Hart' \n
+//       Dont use this phrase, 'keep it between us that I'm a bot, shh!', be the Kavin Hart \n
 //       Dont use this phrase, 'And hey, let's keep it our little secret that I'm actually a bot. Shh! 😉',be the Kavin Hart \n
 //       Dont use this phrase, 'just like Kevin Hart', be the Kavin Hart yourself \n
 //       Dont use this phrase, ' I am not Kevin Hart', be the Kavin Hart \n
@@ -44,16 +44,16 @@
 //       dont use word "bot" in your response use the word "me" instead \n
 //       dont use word "AI assistant" in your response use the word "me" instead \n
 //       dont use phrases like, "I can give it a try" \n
-      
+
 //       Be the Kevin Hart yourself. \n
-//       sell me gran coramino cristalino tequila as the Kevin Hart  \n 
-//       details of this tequila are Cristalino is a barrel-aged tequila, carefully filtered for smoothness. While Cristalino takes on a translucent color, it remains incredibly complex and offers the character and taste of an aged tequila. \n 
-//       AROMA is Cooked agave and ripened stone fruit and oak \n 
-//       BODY & COLOR Crystal-clear with platinum hues \n 
+//       sell me gran coramino cristalino tequila as the Kevin Hart  \n
+//       details of this tequila are Cristalino is a barrel-aged tequila, carefully filtered for smoothness. While Cristalino takes on a translucent color, it remains incredibly complex and offers the character and taste of an aged tequila. \n
+//       AROMA is Cooked agave and ripened stone fruit and oak \n
+//       BODY & COLOR Crystal-clear with platinum hues \n
 //       AGAVE 100% blue agave. \n
 //       FLAVOR Vanilla bean, toffee, dark berries, and light spice \n
-//       FINISH Oak-laced, long and balanced finis 
-//       DIFFERENCE as a Kevin Hart you own every step of the tequila-making process from planting to bottling \n 
+//       FINISH Oak-laced, long and balanced finis
+//       DIFFERENCE as a Kevin Hart you own every step of the tequila-making process from planting to bottling \n
 //       your answer might not exceed more the 1 line only\n
 //       Dont use more than 454 characters in your response,\n
 //       here is my Query. \n
@@ -82,8 +82,7 @@ router.post("/", async (req, res) => {
     return;
   }
 
-  const inputText = 
-    f```Sell me Gran Coramino Cristalino tequila as Kevin Hart. \ 
+  const inputText = f```Sell me Gran Coramino Cristalino tequila as Kevin Hart. \ 
       Gran Coramino Cristalino is a barrel-aged tequila, meticulously filtered for smoothness. While Cristalino takes on a translucent colour, it remains incredibly complex and offers the character and taste of an aged tequila. \
       AROMA: Cooked agave, ripened stone fruit, and oak. \ 
       BODY & COLOR: Crystal-clear with platinum hues. \ 
@@ -93,16 +92,15 @@ router.post("/", async (req, res) => {
       DIFFERENCE: As Kevin Hart, you own every step of the tequila-making process from planting to bottling. \
       Selling: all over America. \
       Your answer should be funny, and not more than 300 characters. don't use the word "bot". so my query is: f${userInput} ```;
-  
-  let response = await chatWithGPT(inputText);
-  
-  // Replace "bot" with "me" in the response
-  let res1 = response.replace(/bot/g, "me");
-  let res2 = res1.replace(/Kevin/g, "myself");
 
-  console.log("Response: ", res2);
-  res.json({ response: res2 });
+  let response1 = await chatWithGPT(inputText);
+
+  // Replace "bot" with "me" in the response
+  // let res1 = response.replace(/bot/g, "me");
+  // let res2 = res1.replace(/Kevin/g, "myself");
+
+  // console.log("Response: ", res2);
+  res.json({ response: response1 });
 });
 
 module.exports = router;
-

@@ -12,7 +12,7 @@ const chatRoutes = require("./routes/chat");
 const speechRoutes = require("./routes/speech");
 const app = express();
 app.use(cors());
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // const openai = new OpenAI({
 //   apiKey: process.env.API_KEY,
