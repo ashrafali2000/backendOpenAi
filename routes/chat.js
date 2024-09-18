@@ -92,7 +92,7 @@ router.post("/", async (req, res) => {
       Selling: all over America. \
       Your answer should be funny, and not more than 300 characters. don't use the word "bot". so my query is: ${userInput}`;
 
-  let response1 = await chatWithGPT(inputText);
+  let response1 = await chatWithGPT(userInput);
 
   // Replace "bot" with "me" in the response
   // let res1 = response.replace(/bot/g, "me");
