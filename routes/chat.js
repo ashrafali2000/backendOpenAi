@@ -100,7 +100,7 @@ router.post("/", async (req, res) => {
   // let res2 = res1.replace(/Kevin/g, "myself");
 
   // console.log("Response: ", res2);
-  res.json({ response: response1 });
+  res.json({ response: `${response1}----checking` });
 });
 
 module.exports = router;
