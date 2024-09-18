@@ -27,7 +27,7 @@ const chatWithGPT = async (prompt) => {
     return truncatedResponse;
   } catch (error) {
     console.error("Error:", error.message);
-    return null;
+    return "api not working";
   }
 };
 
